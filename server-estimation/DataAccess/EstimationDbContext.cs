@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using server_estimation.Models;
 
 namespace server_estimation.DataAccess
 {
@@ -9,6 +10,8 @@ namespace server_estimation.DataAccess
         {
             _configuration = configuration;
         }
+
+        public DbSet<Users> User => Set<Users>();
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
