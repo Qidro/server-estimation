@@ -17,6 +17,15 @@ namespace server_estimation
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<EstimationDbContext>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy => {
+                    policy.WithOrigins("http://localhost:3000");
+                    policy.AllowAnyHeader();
+                    policy.AllowAnyMethod();
+                });   
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -26,6 +35,7 @@ namespace server_estimation
                 app.UseSwaggerUI();
             }
 
+            app.UseCors();
             app.UseAuthorization();
 
 

@@ -17,9 +17,14 @@ namespace server_estimation.Controllers
         {
             _dbcontext = dbContext;
         }
-
-        //тестовые контроллер страницы регистрации
         [HttpGet]
+        public async Task<IActionResult> RegistrationUser()
+        {
+            Console.WriteLine("все ок");
+            return Ok();
+        }
+        //тестовые контроллер страницы регистрации
+        [HttpPost]
         public async Task<IActionResult> RegistrationUser([FromBody] CreateUser request)
         {
             //отправка полученных данных в обьект модели
@@ -29,7 +34,7 @@ namespace server_estimation.Controllers
             await _dbcontext.User.AddAsync(user);
             //сохранение изменений
             await _dbcontext.SaveChangesAsync();
-
+            Console.WriteLine("Пользователь зареган");
             return Ok();
         }
     }
