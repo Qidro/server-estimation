@@ -2,8 +2,9 @@
 {
     public class Users
     {
-        public Users(string firstName, string lastName, string patronymic, string email, string password)
+        public Users(string login, string firstName, string lastName, string patronymic, string email, string password)
         {
+            Login = login;
             FirstName = firstName;
             LastName = lastName;
             Patronymic = patronymic;
@@ -12,6 +13,8 @@
         }
 
         public int Id { get; set; }
+
+        public string Login { get; set; }
 
         public string FirstName { get; set; }
 

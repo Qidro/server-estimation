@@ -27,13 +27,14 @@ namespace server_estimation.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrationUser([FromBody] CreateUser request)
         {
+            Console.WriteLine("Я здесь");
             //отправка полученных данных в обьект модели
-            var user = new Users(request.FirstName, request.LastName, request.Patronymic, request.Email, request.Password);
+            var user = new Users(request.Login, request.FirstName, request.LastName, request.Patronymic, request.Email, request.Password);
 
             //внесение изменений в БД
             await _dbcontext.User.AddAsync(user);
             //сохранение изменений
-            await _dbcontext.SaveChangesAsync();
+            await _dbcontext.SaveChangesAsync(); 
             Console.WriteLine("Пользователь зареган");
             return Ok();
         }
