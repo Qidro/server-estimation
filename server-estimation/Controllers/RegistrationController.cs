@@ -34,7 +34,7 @@ namespace server_estimation.Controllers
                 //отправка полученных данных в обьект модели
                 var user = new Users(request.Login, request.FirstName, request.LastName, request.Patronymic, request.Email, request.Password);
 
-                Console.WriteLine("Наши поля: ",user.Login, user.FirstName, user.LastName, user.Patronymic, user.Email, user.Password);
+                Console.WriteLine("Наши поля: ",user.Login);
                 //внесение изменений в БД
                 await _dbcontext.User.AddAsync(user);
                 //сохранение изменений

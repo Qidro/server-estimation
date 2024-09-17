@@ -11,7 +11,7 @@ namespace server_estimation.DataAccess
             _configuration = configuration;
         }
 
-        public DbSet<Users> User => Set<Users>();
+        public DbSet<Users> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
