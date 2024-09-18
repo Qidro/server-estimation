@@ -1,8 +1,8 @@
 ﻿namespace server_estimation.Models
 {
-    public class Users
+    public class Clients
     {
-        public Users(string login, string firstName, string lastName, string patronymic, string email, string password)
+        public Clients(string login, string firstName, string lastName, string patronymic, string email, string password)
         {
             Login = login;
             FirstName = firstName;
@@ -12,7 +12,7 @@
             Password = password;
         }
 
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Login { get; set; }
 

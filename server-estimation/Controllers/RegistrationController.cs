@@ -28,15 +28,24 @@ namespace server_estimation.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrationUser([FromBody] CreateUser request)
         {
+
             Console.WriteLine("Я регистрирую пользователя");
             try
             {
+                // Проверка на уникальность логина
+                bool exists = _dbcontext.Client.Any(u => u.Login == request.Login);
+                // Проверка на уникальность логина
+                if (exists)
+                {
+                    Console.WriteLine("Этот логин уже существует.");
+                    return Ok("Данный логин занят");
+                }
                 //отправка полученных данных в обьект модели
-                var user = new Users(request.Login, request.FirstName, request.LastName, request.Patronymic, request.Email, request.Password);
+                var user = new Clients(request.Login, request.FirstName, request.LastName, request.Patronymic, request.Email, request.Password);
 
                 Console.WriteLine("Наши поля: ",user.Login);
                 //внесение изменений в БД
-                await _dbcontext.User.AddAsync(user);
+                await _dbcontext.Client.AddAsync(user);
                 //сохранение изменений
                 await _dbcontext.SaveChangesAsync();
                 Console.WriteLine("Пользователь зареган");
