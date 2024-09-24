@@ -11,7 +11,7 @@ using server_estimation.DataAccess;
 namespace server_estimation.Migrations
 {
     [DbContext(typeof(EstimationDbContext))]
-    [Migration("20240917072059_init")]
+    [Migration("20240924054147_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -24,13 +24,16 @@ namespace server_estimation.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("server_estimation.Models.Clients", b =>
+            modelBuilder.Entity("server_estimation.Models.Users", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("ConfirmedEmail")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -58,7 +61,7 @@ namespace server_estimation.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Client");
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }
