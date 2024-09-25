@@ -1,5 +1,11 @@
 
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using server_estimation.DataAccess;
+using server_estimation.SenderE;
+using System.ComponentModel.DataAnnotations;
+
+using IEmailSender = server_estimation.SenderE.IEmailSender;
 
 namespace server_estimation
 {
@@ -9,7 +15,10 @@ namespace server_estimation
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+            // builder.Services.AddTransient<EmailSender>();
             // Add services to the container.
+            //builder.Services.AddTransient<IEmailSender, EmailSender>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

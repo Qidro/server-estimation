@@ -4,8 +4,15 @@ using server_estimation.Contracts;
 using server_estimation.DataAccess;
 using server_estimation.Migrations;
 using server_estimation.Models;
+using server_estimation.SenderE;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+
+using System.Threading.Tasks;
+using MailKit.Net.Smtp;
+using MimeKit;
+
 
 namespace server_estimation.Controllers
 {
@@ -14,11 +21,12 @@ namespace server_estimation.Controllers
     public class RegistrationController : Controller
     {
         private readonly EstimationDbContext _dbcontext;
+        private readonly IEmailSender _EmailSender;
 
-
-        public RegistrationController(EstimationDbContext dbContext)
+        public RegistrationController(EstimationDbContext dbContext, IEmailSender emailSender)
         {
             _dbcontext = dbContext;
+            _EmailSender = emailSender;
         }
         [HttpGet]
         public async Task<IActionResult> RegistrationUserr()
@@ -53,13 +61,14 @@ namespace server_estimation.Controllers
                 //сохранение изменений
                 await _dbcontext.SaveChangesAsync();
                 Console.WriteLine("Пользователь зареган");
-            
-                //попытка подвержедния почты
+
+               
                 
+
             }
             catch (Exception e)
             {
-                Console.WriteLine("Ошибка: ", e.ToString());
+                Console.WriteLine($"Ошибка: { e.Message}");
             }
             return Ok();
         }
