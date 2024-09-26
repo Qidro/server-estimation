@@ -1,14 +1,17 @@
-﻿namespace server_estimation.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace server_estimation.Models
 {
     public class Users
     {
-        public Users(string login, string firstName, string lastName, string patronymic, string email, bool confirmedEmail, string password)
+        public Users(string login, string firstName, string lastName, string patronymic, string email,string tokenEmail, bool confirmedEmail, string password)
         {
             Login = login;
             FirstName = firstName;
             LastName = lastName;
             Patronymic = patronymic;
             Email = email;
+            TokenEmail = tokenEmail;
             ConfirmedEmail = confirmedEmail;
             Password = password;
         }
@@ -24,6 +27,8 @@
         public string Patronymic { get; set; }
 
         public string Email { get; set; }
+
+        public string TokenEmail { get; set; }
 
         public bool ConfirmedEmail { get; set; }
 

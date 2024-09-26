@@ -11,7 +11,7 @@ using server_estimation.DataAccess;
 namespace server_estimation.Migrations
 {
     [DbContext(typeof(EstimationDbContext))]
-    [Migration("20240924054147_init")]
+    [Migration("20240926055231_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -56,6 +56,10 @@ namespace server_estimation.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Patronymic")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TokenEmail")
                         .IsRequired()
                         .HasColumnType("text");
 

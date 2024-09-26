@@ -22,6 +22,7 @@ namespace server_estimation.Migrations
                     LastName = table.Column<string>(type: "text", nullable: false),
                     Patronymic = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
+                    TokenEmail = table.Column<string>(type: "text", nullable: true),
                     ConfirmedEmail = table.Column<bool>(type: "boolean", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false)
                 },

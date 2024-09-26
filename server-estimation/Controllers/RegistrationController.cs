@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using server_estimation.Contracts;
 using server_estimation.DataAccess;
-using server_estimation.Migrations;
 using server_estimation.Models;
 using server_estimation.SenderE;
 using System.Net;
@@ -12,7 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 using MimeKit;
-
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace server_estimation.Controllers
 {
@@ -21,15 +21,13 @@ namespace server_estimation.Controllers
     public class RegistrationController : Controller
     {
         private readonly EstimationDbContext _dbcontext;
-        private readonly IEmailSender _EmailSender;
-
-        public RegistrationController(EstimationDbContext dbContext, IEmailSender emailSender)
+        public RegistrationController(EstimationDbContext dbContext)
         {
             _dbcontext = dbContext;
-            _EmailSender = emailSender;
+
         }
         [HttpGet]
-        public async Task<IActionResult> RegistrationUserr()
+        public async Task<IActionResult> RegistrationUser()
         {
             Console.WriteLine("все ок");
             return Ok();
@@ -52,8 +50,11 @@ namespace server_estimation.Controllers
                     Console.WriteLine("Этот логин уже существует.");
                     return Ok("Данный логин занят");
                 }
+
+                // Генерация кода подтверждения
+                string ConfirmationCode = Guid.NewGuid().ToString();
                 //отправка полученных данных в обьект модели
-                var user = new Users(request.Login, request.FirstName, request.LastName, request.Patronymic, request.Email, false, HashPassword);
+                var user = new Users(request.Login, request.FirstName, request.LastName, request.Patronymic, request.Email, ConfirmationCode, false, HashPassword);
 
                 Console.WriteLine("Наши поля: ",user.Login);
                 //внесение изменений в БД
@@ -62,8 +63,17 @@ namespace server_estimation.Controllers
                 await _dbcontext.SaveChangesAsync();
                 Console.WriteLine("Пользователь зареган");
 
-               
-                
+                //EmailSender b = new EmailSender();
+                //await b.SendEmailAsync("pavel.osincev04@mail.ru", "Тема", "Это мое ссобщение");
+
+                // генерация токена для пользователя
+                //http://localhost:5281/Registration
+                //http://your-app.com/api/auth/confirm?code={ConfirmationCode}
+                var callbackUrl = $"http://localhost:5281/ConfirmationEmail?Token={ConfirmationCode}";
+
+                EmailSender emailService = new EmailSender();
+                await emailService.SendEmailAsync(user.Email, "Confirm your account",
+                    $"Подтвердите регистрацию, перейдя по ссылке: <a href=' {callbackUrl} '>link</a>");
 
             }
             catch (Exception e)

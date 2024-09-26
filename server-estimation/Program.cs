@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using server_estimation.DataAccess;
-using server_estimation.SenderE;
+using server_estimation.Models;
 using System.ComponentModel.DataAnnotations;
 
-using IEmailSender = server_estimation.SenderE.IEmailSender;
 
 namespace server_estimation
 {
@@ -46,7 +45,8 @@ namespace server_estimation
 
             app.UseCors();
             app.UseAuthorization();
-
+            //builder.Services.AddIdentity<Users, IdentityRole>()
+            //    .AddEntityFrameworkStores<EstimationDbContext>();
 
             app.MapControllers();
 
