@@ -69,6 +69,8 @@ namespace server_estimation.Controllers
                 // генерация токена для пользователя
                 //http://localhost:5281/Registration
                 //http://your-app.com/api/auth/confirm?code={ConfirmationCode}
+
+                
                 var callbackUrl = $"http://localhost:5281/ConfirmationEmail?Token={ConfirmationCode}";
 
                 EmailSender emailService = new EmailSender();

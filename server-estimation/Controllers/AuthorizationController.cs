@@ -24,19 +24,22 @@ namespace server_estimation.Controllers
         {
             try
             {
+                //проверка - зареган ли пользователь 
                 var registered = _dbcontext.Users.SingleOrDefault(u => u.Login == request.Login);
                 if (registered != null)
                 {
                     Console.WriteLine("Пользователь есть");
+                    //проверк на сооветсвие пароля
                     using SHA256 hash = SHA256.Create();
                     string HashPassword = Convert.ToHexString(hash.ComputeHash(Encoding.ASCII.GetBytes(request.Password)));
 
                     if (registered.Password == HashPassword)
                     {
                         Console.WriteLine("Пароль совпал");
+                        //проверка на подверждение почты
                         if (registered.ConfirmedEmail == true)
                         {
-                            Console.WriteLine("Совпадние есть");
+                            Console.WriteLine("Токен был автивирован");
                         }
                     }
 

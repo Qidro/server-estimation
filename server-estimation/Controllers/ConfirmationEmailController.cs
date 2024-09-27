@@ -27,6 +27,7 @@ namespace server_estimation.Controllers
                 // Проверка на уникальность логина
                 if (exists)
                 {
+                    //находим пользователя с данным токеном и меняем состояния поля, что он  подвердил потчу
                     var department = _dbcontext.Users.Where(d => d.TokenEmail == Token).First();
                     department.ConfirmedEmail = true;
                     _dbcontext.SaveChanges();
