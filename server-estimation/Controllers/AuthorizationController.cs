@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.Ess;
 using server_estimation.Contracts;
 using server_estimation.DataAccess;
+using server_estimation.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -42,14 +43,21 @@ namespace server_estimation.Controllers
                         Console.WriteLine("Пароль совпал");
                         //проверка на подверждение почты
                         if (registered.ConfirmedEmail == true)
-                        {
+                        {   
                             Console.WriteLine("Токен был автивирован");
                             //настройка JWT токена
                             string TokenSession = Guid.NewGuid().ToString();
+
+                            var session = new Sessions(registered.Id, TokenSession);
+
+                            await _dbcontext.Session.AddAsync(session);
+
+                            await _dbcontext.SaveChangesAsync();
+
                             Claim[] claims = [new("userSession", TokenSession)];
 
                             var signingCredentials = new SigningCredentials(
-                                new SymmetricSecurityKey(Encoding.UTF8.GetBytes("goodmorning")),
+                                new SymmetricSecurityKey(Encoding.UTF8.GetBytes("goodmorningmyusergoodmorningmyuser")),
                                 SecurityAlgorithms.HmacSha256
                                 );
 
@@ -61,10 +69,10 @@ namespace server_estimation.Controllers
 
                             var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
 
-                            //return tokenValue;
+                            return Ok(tokenValue);
 
 
-
+                           
                         }
                     }
 
@@ -81,7 +89,7 @@ namespace server_estimation.Controllers
             {
                 Console.WriteLine($"Ошибка проверки: {ex}");
             }
-            return Ok("Успешный вход");
+            return Ok();
         }
 
        
