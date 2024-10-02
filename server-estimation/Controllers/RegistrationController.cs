@@ -60,7 +60,7 @@ namespace server_estimation.Controllers
                 //внесение изменений в БД
                 await _dbcontext.Users.AddAsync(user);
                 //сохранение изменений
-                await _dbcontext.SaveChangesAsync();
+                await _dbcontext.SaveChangesAsync();    
                 Console.WriteLine("Пользователь зареган");
 
                 //EmailSender b = new EmailSender();

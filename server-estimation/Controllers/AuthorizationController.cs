@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Asn1.Ess;
 using server_estimation.Contracts;
 using server_estimation.DataAccess;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -40,6 +44,27 @@ namespace server_estimation.Controllers
                         if (registered.ConfirmedEmail == true)
                         {
                             Console.WriteLine("Токен был автивирован");
+                            //настройка JWT токена
+                            string TokenSession = Guid.NewGuid().ToString();
+                            Claim[] claims = [new("userSession", TokenSession)];
+
+                            var signingCredentials = new SigningCredentials(
+                                new SymmetricSecurityKey(Encoding.UTF8.GetBytes("goodmorning")),
+                                SecurityAlgorithms.HmacSha256
+                                );
+
+                            var token = new JwtSecurityToken(
+                                claims: claims,
+                                signingCredentials: signingCredentials,
+                                expires: DateTime.UtcNow.AddDays(1)
+                                );
+
+                            var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
+
+                            //return tokenValue;
+
+
+
                         }
                     }
 
@@ -49,13 +74,16 @@ namespace server_estimation.Controllers
                 else
                 {
                     Console.WriteLine("Совпадения нет");
+                    return Ok("Пользователь не зарегистрирован");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка проверки: {ex}");
             }
-            return Ok();
+            return Ok("Успешный вход");
         }
+
+       
     }
 }
