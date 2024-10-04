@@ -63,8 +63,10 @@ namespace server_estimation.Controllers
 
                             var token = new JwtSecurityToken(
                                 claims: claims,
+                                issuer: "USMA",
+                                audience:"UserUSMA",
                                 signingCredentials: signingCredentials,
-                                expires: DateTime.UtcNow.AddDays(1)
+                                expires: DateTime.UtcNow.AddMinutes(2)
                                 );
 
                             var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
