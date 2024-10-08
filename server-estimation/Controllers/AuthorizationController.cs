@@ -66,7 +66,7 @@ namespace server_estimation.Controllers
                                 issuer: "USMA",
                                 audience:"UserUSMA",
                                 signingCredentials: signingCredentials,
-                                expires: DateTime.UtcNow.AddMinutes(2)
+                                expires: DateTime.UtcNow.AddMinutes(30)
                                 );
 
                             var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
@@ -91,7 +91,7 @@ namespace server_estimation.Controllers
             {
                 Console.WriteLine($"Ошибка проверки: {ex}");
             }
-            return Ok();
+            return Ok("Ошибка проверки");
         }
 
        

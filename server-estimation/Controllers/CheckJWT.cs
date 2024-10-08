@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using server_estimation.Contracts;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -12,7 +13,7 @@ namespace server_estimation.Controllers
     public class CheckJWT : Controller
     {
         [HttpPost]
-        public async Task<IActionResult> JWTCheck(string token)
+        public async Task<IActionResult> JWTCheck([FromBody] Token request)
         {
             // Создание ключа безопасности
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("goodmorningmyusergoodmorningmyuser"));
@@ -34,7 +35,7 @@ namespace server_estimation.Controllers
 
                 // Валидация токена
                 SecurityToken validatedToken;
-                var principal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+                var principal = tokenHandler.ValidateToken(request.token, validationParameters, out validatedToken);
 
                 // Если токен валиден, дальнейшая обработка
                 Console.WriteLine("Токен действителен!");
@@ -45,19 +46,19 @@ namespace server_estimation.Controllers
             catch (SecurityTokenExpiredException)
             {
                 Console.WriteLine("Токен истек");
-                return Ok("Токен истек");
+                return StatusCode(400);
             }
             catch (SecurityTokenException)
             {
                 Console.WriteLine("Токен недействителен");
-                return Ok("Токен недействителен");
+                return StatusCode(400);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка проверки токена: {ex.Message}");
-                return Ok("Ошибка проверки токена");
+                return StatusCode(400);
             }
-            return Ok("Токен успешно проверен");
+            return Ok(true);
         }
     }
 }
