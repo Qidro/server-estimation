@@ -12,7 +12,7 @@ namespace server_estimation.DataAccess
         }
 
         public DbSet<Users> Users { get; set; }
-        public DbSet<Sessions> Session { get; set; }
+        public DbSet<Survey> Survey { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

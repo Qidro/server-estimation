@@ -11,8 +11,8 @@ using server_estimation.DataAccess;
 namespace server_estimation.Migrations
 {
     [DbContext(typeof(EstimationDbContext))]
-    [Migration("20241002114028_newinit")]
-    partial class newinit
+    [Migration("20241014061356_SutveyT")]
+    partial class SutveyT
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace server_estimation.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("server_estimation.Models.Sessions", b =>
+            modelBuilder.Entity("server_estimation.Models.Survey", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,16 +32,17 @@ namespace server_estimation.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdUser")
-                        .HasColumnType("integer");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.Property<string>("NumberSession")
+                    b.Property<string>("TitleSurvey")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Session");
+                    b.ToTable("Survey");
                 });
 
             modelBuilder.Entity("server_estimation.Models.Users", b =>

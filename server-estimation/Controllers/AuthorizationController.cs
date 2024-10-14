@@ -48,12 +48,6 @@ namespace server_estimation.Controllers
                             //настройка JWT токена
                             string TokenSession = Guid.NewGuid().ToString();
 
-                            var session = new Sessions(registered.Id, TokenSession);
-
-                            await _dbcontext.Session.AddAsync(session);
-
-                            await _dbcontext.SaveChangesAsync();
-
                             Claim[] claims = [new("userSession", TokenSession)];
 
                             var signingCredentials = new SigningCredentials(
