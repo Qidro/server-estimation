@@ -46,12 +46,12 @@ namespace server_estimation.Controllers
             catch (SecurityTokenExpiredException)
             {
                 Console.WriteLine("Токен истек");
-                return StatusCode(400);
+                return StatusCode(401);
             }
             catch (SecurityTokenException)
             {
                 Console.WriteLine("Токен недействителен");
-                return StatusCode(400);
+                return StatusCode(401);
             }
             catch (Exception ex)
             {

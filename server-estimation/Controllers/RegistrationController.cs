@@ -54,7 +54,7 @@ namespace server_estimation.Controllers
                 // Генерация кода подтверждения
                 string ConfirmationCode = Guid.NewGuid().ToString();
                 //отправка полученных данных в обьект модели
-                var user = new Users(request.Login, request.FirstName, request.LastName, request.Patronymic, request.Email, ConfirmationCode, false, HashPassword);
+                var user = new Users(request.Login, request.FirstName, request.LastName, request.Patronymic, request.Email, ConfirmationCode, false,"Пользователь", HashPassword);
 
                 Console.WriteLine("Наши поля: ",user.Login);
                 //внесение изменений в БД

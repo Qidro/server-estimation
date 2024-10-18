@@ -2,6 +2,7 @@
 using server_estimation.Contracts;
 using server_estimation.DataAccess;
 using server_estimation.Models;
+using System.Data;
 using System.Xml.Linq;
 
 namespace server_estimation.Controllers
@@ -37,7 +38,8 @@ namespace server_estimation.Controllers
                         Login = theUsers.Login,
                         FullName  = theUsers.LastName +" " + theUsers.FirstName + " " + theUsers.Patronymic,
                         Email = theUsers.Email,
-                        ConfirmedEmail = theUsers.ConfirmedEmail
+                        ConfirmedEmail = theUsers.ConfirmedEmail,
+                        Role = theUsers.Role
                     });
 
                 }
@@ -60,6 +62,7 @@ namespace server_estimation.Controllers
             public string FullName { get; set; }
             public string Email { get; set; }
             public bool ConfirmedEmail { get; set; }
+            public string Role { get; set; }
         }
     }
 }
