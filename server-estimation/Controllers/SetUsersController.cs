@@ -33,6 +33,7 @@ namespace server_estimation.Controllers
                     //Console.WriteLine(theGalaxy.Name + "  " + theGalaxy.Email);
                     UsersList.Add(new СhangeUsers
                     {
+                        Id = theUsers.Id,
                         Login = theUsers.Login,
                         FullName  = theUsers.LastName +" " + theUsers.FirstName + " " + theUsers.Patronymic,
                         Email = theUsers.Email,
@@ -54,6 +55,7 @@ namespace server_estimation.Controllers
 
         public class СhangeUsers
         {
+            public int Id { get; set; }
             public string Login { get; set; }
             public string FullName { get; set; }
             public string Email { get; set; }
