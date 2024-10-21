@@ -39,6 +39,8 @@ namespace server_estimation.Controllers
                         FullName  = theUsers.LastName +" " + theUsers.FirstName + " " + theUsers.Patronymic,
                         Email = theUsers.Email,
                         ConfirmedEmail = theUsers.ConfirmedEmail,
+                        Divisions = theUsers.Divisions,
+                        JogTitle = theUsers.JogTitle,
                         Role = theUsers.Role
                     });
 
@@ -62,6 +64,8 @@ namespace server_estimation.Controllers
             public string FullName { get; set; }
             public string Email { get; set; }
             public bool ConfirmedEmail { get; set; }
+            public string Divisions { get; set; }
+            public string JogTitle { get; set; }
             public string Role { get; set; }
         }
     }
