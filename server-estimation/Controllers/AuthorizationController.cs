@@ -48,7 +48,8 @@ namespace server_estimation.Controllers
                             //настройка JWT токена
                             string TokenSession = Guid.NewGuid().ToString();
 
-                            Claim[] claims = [new("userSession", TokenSession)];
+                            Claim[] claims = [new("userSession", TokenSession),
+                            new("user", request.Login)];
 
                             var signingCredentials = new SigningCredentials(
                                 new SymmetricSecurityKey(Encoding.UTF8.GetBytes("goodmorningmyusergoodmorningmyuser")),

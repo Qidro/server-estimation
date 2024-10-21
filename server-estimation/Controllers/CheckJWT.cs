@@ -40,8 +40,20 @@ namespace server_estimation.Controllers
                 // Если токен валиден, дальнейшая обработка
                 Console.WriteLine("Токен действителен!");
                 // Например, можно получить пользовательские claims
-                var userId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                Console.WriteLine($"User ID: {userId}");
+                var userId = principal.Claims;
+                //тестовая перменная для получения логина
+                string login = null;
+                // Выводим значения claims
+                foreach (var claim in userId)
+                {
+                    Console.WriteLine($"Type: {claim.Type}, Value: {claim.Value}");
+
+                    if (claim.Type == "user")
+                    {
+                        login = claim.Value;
+                    }
+                }
+                Console.WriteLine("Логин пользователя:"+ login);
             }
             catch (SecurityTokenExpiredException)
             {
