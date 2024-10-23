@@ -40,7 +40,7 @@ namespace server_estimation.Controllers
                         Email = theUsers.Email,
                         ConfirmedEmail = theUsers.ConfirmedEmail,
                         Divisions = theUsers.Divisions,
-                        JogTitle = theUsers.JogTitle,
+                        JobTitle = theUsers.JobTitle,
                         Role = theUsers.Role
                     });
 
@@ -65,7 +65,7 @@ namespace server_estimation.Controllers
             public string Email { get; set; }
             public bool ConfirmedEmail { get; set; }
             public string Divisions { get; set; }
-            public string JogTitle { get; set; }
+            public string JobTitle { get; set; }
             public string Role { get; set; }
         }
     }

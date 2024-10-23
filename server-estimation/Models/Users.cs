@@ -4,7 +4,7 @@ namespace server_estimation.Models
 {
     public class Users
     {
-        public Users(string login, string firstName, string lastName, string patronymic, string email,string tokenEmail, bool confirmedEmail,string divisions, string jogTitle, string role, string password)
+        public Users(string login, string firstName, string lastName, string patronymic, string email,string tokenEmail, bool confirmedEmail,string divisions, string jobTitle, string role, string password)
         {
             Login = login;
             FirstName = firstName;
@@ -14,7 +14,7 @@ namespace server_estimation.Models
             TokenEmail = tokenEmail;
             ConfirmedEmail = confirmedEmail;
             Divisions = divisions;
-            JogTitle = jogTitle;
+            JobTitle = jobTitle;
             Role = role;
             Password = password;
         }
@@ -37,7 +37,7 @@ namespace server_estimation.Models
 
         public string Divisions { get; set; }
 
-        public string JogTitle { get; set; }
+        public string JobTitle { get; set; }
 
         public string Role { get; set; }
 
