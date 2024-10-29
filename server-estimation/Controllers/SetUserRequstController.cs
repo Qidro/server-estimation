@@ -52,12 +52,12 @@ namespace server_estimation.Controllers
                                 if (FullName.Length == 2)
                                 {
                                     //запрос к бд по Имени - Отчеству или Имении - Фамилии или Фамилии - отчеству
-                                    var examination = _dbcontext.Users.Where(u => u.FirstName == FullName[1] && u.Patronymic == FullName[2]
-                                    ||
-                                    u.FirstName == FullName[1] && u.LastName == FullName[0]
-                                    ||
-                                    u.LastName == FullName[0] && u.Patronymic == FullName[2]
-                                    ).FirstOrDefault();
+                                    var examination = _dbcontext.Users
+                                    .Where(u => (u.FirstName == FullName[0] && u.Patronymic == FullName[1]) ||
+                                                 (u.FirstName == FullName[0] && u.LastName == FullName[1]) ||
+                                                 (u.LastName == FullName[0] && u.FirstName == FullName[1]) ||
+                                                 (u.LastName == FullName[0] && u.Patronymic == FullName[1]))
+                                    .FirstOrDefault();
                                     if (examination != null)
                                     {
 
