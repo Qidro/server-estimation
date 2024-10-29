@@ -31,7 +31,7 @@ namespace server_estimation.Controllers
 
                 foreach (var theUsers in allRows)
                 {
-                    //Console.WriteLine(theGalaxy.Name + "  " + theGalaxy.Email);
+                    //парсим даные в коллекцию
                     UsersList.Add(new СhangeUsers
                     {
                         Id = theUsers.Id,
