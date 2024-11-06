@@ -25,12 +25,46 @@ namespace server_estimation.Controllers
             {
                 //внесение изменений в БД
                 await _dbcontext.Survey.AddAsync(survey);
-
+                //поулчаем середину массива
+                int LenIdQ = request.IdQuestion.Length/2;
                 for (int i = 0; request.idQ.Length > i; i++ )
                 {
                     Question question = new Question { TitleQuestion = request.titleQuestion[i], Description = request.descriptionQuestion[i], Survey = survey };
                     await _dbcontext.Question.AddAsync(question);
+                    int j = 0;
+                    if (request.idQ[i] > request.IdQuestion[LenIdQ])
+                    {
+                        j = LenIdQ;
+                    }
+                    else if (request.idQ[i] < request.IdQuestion[LenIdQ])
+                    {
+                        j = request.IdQuestion.Length - LenIdQ;
+                    }
+                    else if (request.idQ[i] == 0)
+                    {
+                       
+                    }
+                    else
+                    {
+                        while (request.idQ[i] == request.IdQuestion[LenIdQ])
+                        {
+                            LenIdQ = LenIdQ - 1;
+                        }
+                        j = LenIdQ;
+                    }
 
+                    for (; request.IdQuestion.Length > j; j++ )
+                    {
+                        if (request.idQ[i] == request.IdQuestion[j])
+                        {
+                            Answers answers = new Answers { Question = request.question[j], Comment = request.comment[j], Points = request.points[j], Questions = question };
+                            Console.WriteLine("Сохрагя именения ответов");
+                            await _dbcontext.Answers.AddAsync(answers);
+                        }
+                        //else {
+                        //    break;
+                        //}
+                    }
 
                 }
 
