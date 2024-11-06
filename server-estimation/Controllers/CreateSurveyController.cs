@@ -32,17 +32,17 @@ namespace server_estimation.Controllers
                     Question question = new Question { TitleQuestion = request.titleQuestion[i], Description = request.descriptionQuestion[i], Survey = survey };
                     await _dbcontext.Question.AddAsync(question);
                     int j = 0;
-                    if (request.idQ[i] > request.IdQuestion[LenIdQ])
+                    if (request.idQ[i] == 0)
+                    { 
+
+                    }
+                    else if (request.idQ[i] > request.IdQuestion[LenIdQ])
                     {
                         j = LenIdQ;
                     }
                     else if (request.idQ[i] < request.IdQuestion[LenIdQ])
                     {
                         j = request.IdQuestion.Length - LenIdQ;
-                    }
-                    else if (request.idQ[i] == 0)
-                    {
-                       
                     }
                     else
                     {
