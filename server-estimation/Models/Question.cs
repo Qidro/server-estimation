@@ -2,16 +2,17 @@
 {
     public class Question
     {
-        public Question(string TitleQuestion, string Description) {
-            titleQuestion = TitleQuestion;
-            description = Description;
-        }
+        //public Question(string titleQuestion, string description) {
+        //    TitleQuestion = titleQuestion;
+        //    Description = description;
+        //}
         public int Id { get; set; }
 
-        public string titleQuestion { get; set; }
+        public string TitleQuestion { get; set; }
 
-        public string description { get; set; }
+        public string Description { get; set; }
 
-        public Survey survey { get; set; }
+        public int SurveyId { get; set; }
+        public Survey Survey { get; set; }
     }
 }

@@ -14,6 +14,10 @@ namespace server_estimation.DataAccess
         public DbSet<Users> Users { get; set; }
         public DbSet<Survey> Survey { get; set; }
 
+        public DbSet<Question> Question { get; set; }
+
+        public DbSet<Answers> Answers { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(_configuration.GetConnectionString("Database"));

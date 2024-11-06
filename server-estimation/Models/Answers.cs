@@ -2,14 +2,19 @@
 {
     public class Answers
     {
+        public Answers(string question, string comment, int points) 
+        {
+        
+        }
         public int Id { get; set; }
 
-        public string question { get; set; }
+        public string Question { get; set; }
 
-        public string comment { get; set; }
+        public string Comment { get; set; }
 
-        public int points { get; set; }
+        public int Points { get; set; }
 
-        Question questionId { get; set; }
+        public int QuestionId { get; set; }
+        Question Questions { get; set; }
     }
 }

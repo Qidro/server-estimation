@@ -25,6 +25,15 @@ namespace server_estimation.Controllers
             {
                 //внесение изменений в БД
                 await _dbcontext.Survey.AddAsync(survey);
+
+                for (int i = 0; request.idQ.Length > i; i++ )
+                {
+                    Question question = new Question { TitleQuestion = request.titleQuestion[i], Description = request.descriptionQuestion[i], Survey = survey };
+                    await _dbcontext.Question.AddAsync(question);
+
+
+                }
+
                 //сохранение изменений
                 await _dbcontext.SaveChangesAsync();
                 Console.WriteLine("Опрос был создан успешно");
