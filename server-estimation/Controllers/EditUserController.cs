@@ -17,7 +17,7 @@ namespace server_estimation.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> EditUsers([FromBody] EditUsers request)
         {
             try

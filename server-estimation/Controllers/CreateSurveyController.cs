@@ -29,7 +29,7 @@ namespace server_estimation.Controllers
                 int LenIdQ = request.IdQuestion.Length/2;
                 for (int i = 0; request.idQ.Length > i; i++ )
                 {
-                    Question question = new Question { TitleQuestion = request.titleQuestion[i], Description = request.descriptionQuestion[i], Survey = survey };
+                    Question question = new Question { TitleQuestion = request.titleQuestion[i], Description = request.descriptionQuestion[i], Level = request.level[i], Survey = survey };
                     await _dbcontext.Question.AddAsync(question);
                     int j = 0;
                     if (request.idQ[i] == 0)

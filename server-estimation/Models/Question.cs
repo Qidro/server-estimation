@@ -12,6 +12,7 @@
 
         public string Description { get; set; }
 
+        public int Level { get; set; }
         public int SurveyId { get; set; }
         public Survey Survey { get; set; }
     }
