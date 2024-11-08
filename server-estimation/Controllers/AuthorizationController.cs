@@ -61,7 +61,7 @@ namespace server_estimation.Controllers
                                 issuer: "USMA",
                                 audience:"UserUSMA",
                                 signingCredentials: signingCredentials,
-                                expires: DateTime.UtcNow.AddMinutes(30)
+                                expires: DateTime.UtcNow.AddDays(2)
                                 );
 
                             var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);

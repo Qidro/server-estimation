@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using server_estimation.Contracts;
 using server_estimation.DataAccess;
@@ -58,7 +59,7 @@ namespace server_estimation.Controllers
                 }
                 Console.WriteLine("Логин пользователя:" + login);
 
-                var examination = _dbcontext.Users.Where(d => d.Login == login).First();
+                var examination = await _dbcontext.Users.Where(d => d.Login == login).FirstAsync();
                 if (examination != null)
                 {
                     if (examination.Role == "Администратор")

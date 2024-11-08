@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using server_estimation.Contracts;
 using server_estimation.DataAccess;
 using server_estimation.Models;
@@ -24,7 +25,7 @@ namespace server_estimation.Controllers
             try
             {
                 // получаем значени из БД
-                var allRows = _dbcontext.Users.ToList();
+                var allRows = await _dbcontext.Users.ToListAsync();
 
                 // создаем коллецию для хранения 
                  var UsersList = new List<СhangeUsers>();
