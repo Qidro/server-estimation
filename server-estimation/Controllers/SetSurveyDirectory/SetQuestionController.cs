@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using server_estimation.Contracts;
 using server_estimation.DataAccess;
 using server_estimation.Models;
+using static server_estimation.Controllers.SetSurveyDirectory.SetAnswerController;
 using static server_estimation.Controllers.SetSurveyDirectory.SetQuestionController;
 
 namespace server_estimation.Controllers.SetSurveyDirectory
@@ -35,9 +36,14 @@ namespace server_estimation.Controllers.SetSurveyDirectory
                        TitleQuestion = theQuestion.TitleQuestion,
                        Description = theQuestion.Description,
                        Level = theQuestion.Level,
-                       SurveyId = theQuestion.SurveyId
+                       stateButton = false
 
                     });
+                }
+                int lastIndex = questionList.FindLastIndex(answer => answer.stateButton == false);
+                if (lastIndex != -1) // Проверяем, найден ли элемент
+                {
+                    questionList[lastIndex].stateButton = true; // Меняем
                 }
                 return Ok(questionList);
             }
@@ -53,7 +59,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
                     TitleQuestion ="",
                     Description = "",
                     Level = 0,
-                    SurveyId = 0
+                    stateButton = false
                 });
                 return Ok(questionList);
             }
@@ -69,7 +75,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
             public string Description { get; set; }
 
             public int Level { get; set; }
-            public int SurveyId { get; set; }
+            public bool stateButton { get; set; }
         }
 
         //public async Task<IActionResult> SetSurveysList()

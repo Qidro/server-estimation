@@ -30,7 +30,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
                 {
                     surveyList.Add(new SurveysList
                     {
-                        Id = theSurvey.Id,
+                        //Id = theSurvey.Id,
                         TitleSurvey = theSurvey.TitleSurvey,
                         Description = theSurvey.Description
 
@@ -72,7 +72,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
         public class SurveysList
         {
             //сам опрос Survey
-            public int Id { get; set; }
+            //public int Id { get; set; }
             public string TitleSurvey { get; set; }
             public string Description { get; set; }
 

@@ -31,16 +31,22 @@ namespace server_estimation.Controllers.SetSurveyDirectory
                     asnwerList.Add(new AnswerList
                     {
                         Id = theAnswer.Id,
+                        IdQuestion = theAnswer.QuestionId,
                         Question = theAnswer.Question,
                         Comment = theAnswer.Comment,
                         Points = theAnswer.Points,
-                        QuestionId = theAnswer.QuestionId
+                        stateButton = false
 
                     });
 
                 }
+                int lastIndex = asnwerList.FindLastIndex(answer => answer.stateButton == false);
 
-                return Ok(asnwerList);
+                if (lastIndex != -1) // Проверяем, найден ли элемент
+                {
+                    asnwerList[lastIndex].stateButton = true; // Меняем
+                }
+                    return Ok(asnwerList);
             }
             catch (Exception ex)
             {
@@ -53,6 +59,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
         public class AnswerList
         {
             public int Id { get; set; }
+            public int IdQuestion { get; set; }
 
             public string Question { get; set; }
 
@@ -60,7 +67,8 @@ namespace server_estimation.Controllers.SetSurveyDirectory
 
             public int Points { get; set; }
 
-            public int QuestionId { get; set; }
+        
+            public bool stateButton { get; set; }
         }
     }
 }
