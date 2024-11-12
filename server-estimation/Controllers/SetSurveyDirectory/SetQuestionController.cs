@@ -1,67 +1,75 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using server_estimation.Contracts;
 using server_estimation.DataAccess;
 using server_estimation.Models;
+using static server_estimation.Controllers.SetSurveyDirectory.SetQuestionController;
 
-namespace server_estimation.Controllers
+namespace server_estimation.Controllers.SetSurveyDirectory
 {
     [ApiController]
     [Route("[controller]")]
-    public class SetSurveysController : Controller
+    public class SetQuestionController : Controller
     {
         private readonly EstimationDbContext _dbcontext;
-        public SetSurveysController(EstimationDbContext dbContext)
+        public SetQuestionController(EstimationDbContext dbContext)
         {
             _dbcontext = dbContext;
 
         }
-        [HttpGet]
+        [HttpPost]
         //получение списка опросов
-        public async Task<IActionResult> SetSurveyList()
+        public async Task<IActionResult> SetSurveyList([FromBody] SurveyId request)
         {
             try
             {
-                var surveys = await _dbcontext.Survey.ToListAsync();
-                var surveyList = new List<SurveyList>();
+                var questions = await _dbcontext.Question.Where(a => a.SurveyId == request.Id).ToListAsync();
+                var questionList = new List<QuestionList>();
 
                 //await Task.WhenAll(surveys);
-                foreach (var theSurvey in surveys)
+                foreach (var theQuestion in questions)
                 {
-                    surveyList.Add(new SurveyList
+                    questionList.Add(new QuestionList
                     {
-                        Id = theSurvey.Id,
-                        Title = theSurvey.TitleSurvey,
-                        Description = theSurvey.Description
+                       Id = theQuestion.Id,
+                       TitleQuestion = theQuestion.TitleQuestion,
+                       Description = theQuestion.Description,
+                       Level = theQuestion.Level,
+                       SurveyId = theQuestion.SurveyId
 
                     });
                 }
-                return Ok(surveyList);
+                return Ok(questionList);
             }
             catch (Exception ex)
             {
                 //если произошла ошибка - заполняем пустой список
                 Console.WriteLine("Произошла ошибка: " + ex.ToString);
-                var survey = new List<SurveyList>();
+                var questionList = new List<QuestionList>();
 
-                survey.Add(new SurveyList
+                questionList.Add(new QuestionList
                 {
                     Id = 1,
-                    Title = " ",
-                    Description = ""
+                    TitleQuestion ="",
+                    Description = "",
+                    Level = 0,
+                    SurveyId = 0
                 });
-                return Ok(survey);
+                return Ok(questionList);
             }
 
         }
 
-        public class SurveyList()
+        public class QuestionList
         {
             public int Id { get; set; }
 
-            public string Title { get; set; }
+            public string TitleQuestion { get; set; }
 
             public string Description { get; set; }
 
+            public int Level { get; set; }
+            public int SurveyId { get; set; }
         }
 
         //public async Task<IActionResult> SetSurveysList()
