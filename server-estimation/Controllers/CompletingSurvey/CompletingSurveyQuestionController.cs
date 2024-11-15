@@ -10,10 +10,10 @@ namespace server_estimation.Controllers.SetSurveyDirectory
 {
     [ApiController]
     [Route("[controller]")]
-    public class SetQuestionController : Controller
+    public class CompletingSurveyQuestionController : Controller
     {
         private readonly EstimationDbContext _dbcontext;
-        public SetQuestionController(EstimationDbContext dbContext)
+        public CompletingSurveyQuestionController(EstimationDbContext dbContext)
         {
             _dbcontext = dbContext;
 
@@ -32,36 +32,21 @@ namespace server_estimation.Controllers.SetSurveyDirectory
                 {
                     questionList.Add(new QuestionList
                     {
-                       Id = theQuestion.Id,
-                       TitleQuestion = theQuestion.TitleQuestion,
-                       Description = theQuestion.Description,
-                       Level = theQuestion.Level,
-                       stateButton = false
+                        Id = theQuestion.Id,
+                        TitleQuestion = theQuestion.TitleQuestion,
+                        Description = theQuestion.Description,
+                        Level = theQuestion.Level
 
                     });
-                }
-                int lastIndex = questionList.FindLastIndex(answer => answer.stateButton == false);
-                if (lastIndex != -1) // Проверяем, найден ли элемент
-                {
-                    questionList[lastIndex].stateButton = true; // Меняем
                 }
                 return Ok(questionList);
             }
             catch (Exception ex)
             {
                 //если произошла ошибка - заполняем пустой список
-                Console.WriteLine("Произошла ошибка: " + ex.ToString);
-                var questionList = new List<QuestionList>();
+                Console.WriteLine("Произошла ошибка: " + ex.Message);
 
-                questionList.Add(new QuestionList
-                {
-                    Id = 1,
-                    TitleQuestion ="",
-                    Description = "",
-                    Level = 0,
-                    stateButton = false
-                });
-                return Ok(questionList);
+                return Ok(false);
             }
 
         }
@@ -75,7 +60,6 @@ namespace server_estimation.Controllers.SetSurveyDirectory
             public string Description { get; set; }
 
             public int Level { get; set; }
-            public bool stateButton { get; set; }
         }
 
         //public async Task<IActionResult> SetSurveysList()
