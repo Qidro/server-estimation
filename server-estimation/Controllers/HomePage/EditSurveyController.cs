@@ -6,7 +6,7 @@ using server_estimation.Contracts;
 using server_estimation.DataAccess;
 using server_estimation.Models;
 
-namespace server_estimation.Controllers
+namespace server_estimation.Controllers.HomePage
 {
     [ApiController]
     [Route("[controller]")]
@@ -61,7 +61,7 @@ namespace server_estimation.Controllers
                     {
                         Question question = new Question { TitleQuestion = request.titleQuestion[i], Description = request.descriptionQuestion[i], Level = request.level[i], Survey = survey };
                         await _dbcontext.Question.AddAsync(question);
-                        
+
 
                         for (int j = 0; request.IdQuestion.Length > j; j++)
                         {

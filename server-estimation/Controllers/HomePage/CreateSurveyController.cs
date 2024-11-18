@@ -5,7 +5,7 @@ using server_estimation.Models;
 using server_estimation.SenderE;
 using System.Text;
 
-namespace server_estimation.Controllers
+namespace server_estimation.Controllers.HomePage
 {
     [ApiController]
     [Route("[controller]")]
@@ -26,8 +26,8 @@ namespace server_estimation.Controllers
                 //внесение изменений в БД
                 await _dbcontext.Survey.AddAsync(survey);
                 //поулчаем середину массива
-                int LenIdQ = request.IdQuestion.Length/2;
-                for (int i = 0; request.idQ.Length > i; i++ )
+                int LenIdQ = request.IdQuestion.Length / 2;
+                for (int i = 0; request.idQ.Length > i; i++)
                 {
                     Question question = new Question { TitleQuestion = request.titleQuestion[i], Description = request.descriptionQuestion[i], Level = request.level[i], Survey = survey };
                     await _dbcontext.Question.AddAsync(question);
@@ -85,7 +85,7 @@ namespace server_estimation.Controllers
                 await _dbcontext.SaveChangesAsync();
                 Console.WriteLine("Опрос был создан успешно");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Произошла ошибка: ", ex.ToString());
             }

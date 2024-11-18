@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using server_estimation.Contracts;
 using server_estimation.DataAccess;
 
-namespace server_estimation.Controllers
+namespace server_estimation.Controllers.HomePage
 {
     [ApiController]
     [Route("[controller]")]
@@ -31,7 +31,7 @@ namespace server_estimation.Controllers
                     //_dbcontext.Users.Remove(examination);
                     //var authors = _dbcontext.Survey.Include(a => a.Id == request.Id).Include(a => a.Q).ToList();
                     //var authors = await  _dbcontext.Survey.Where(a => a.Id == request.Id).ToListAsync();
-                    var authorss = await _dbcontext.Answers.Include(a => a.Questions).Include(o=>o.Questions.Survey).Where(s => s.Questions.Survey.Id == request.Id).ToListAsync();
+                    var authorss = await _dbcontext.Answers.Include(a => a.Questions).Include(o => o.Questions.Survey).Where(s => s.Questions.Survey.Id == request.Id).ToListAsync();
 
                     // Удаляем все продукты, связанные с заказами
                     foreach (var questuin in authorss)

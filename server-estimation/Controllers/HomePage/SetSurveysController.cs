@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using server_estimation.DataAccess;
 using server_estimation.Models;
 
-namespace server_estimation.Controllers
+namespace server_estimation.Controllers.HomePage
 {
     [ApiController]
     [Route("[controller]")]

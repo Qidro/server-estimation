@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using server_estimation.Contracts;
 using server_estimation.DataAccess;
-using static server_estimation.Controllers.SetSurveysController;
+using static server_estimation.Controllers.HomePage.SetSurveysController;
 
 namespace server_estimation.Controllers.SetSurveyDirectory
 {
