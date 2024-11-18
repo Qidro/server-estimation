@@ -1,4 +1,4 @@
 ﻿namespace server_estimation.Contracts
 {
-    public record ComplatingQuestions ( int User,int IdQiestion, int IdAnswer);
+    public record ComplatingQuestions (string token, int IdSurvey ,int[] IdQiestion, int[] IdAnswer, int[] Level);
 }
