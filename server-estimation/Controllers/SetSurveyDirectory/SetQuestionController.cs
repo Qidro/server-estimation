@@ -19,6 +19,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
 
         }
         [HttpPost]
+        //метод для получения списка вопросов для страницы редактирования опроса
         //получение списка опросов
         public async Task<IActionResult> SetSurveyList([FromBody] SurveyId request)
         {

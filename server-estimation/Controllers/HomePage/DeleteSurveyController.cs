@@ -16,6 +16,7 @@ namespace server_estimation.Controllers.HomePage
 
         }
 
+        //удаление опроса
         [HttpDelete]
         public async Task<IActionResult> DeleteSurvey([FromBody] SurveyId request)
         {

@@ -17,7 +17,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
             _dbcontext = dbContext;
 
         }
-
+        //метод для получения списка вариантов вопроса для страницы редактирования опроса
         [HttpPost]
         public async Task<IActionResult> SetAnswers([FromBody] SurveyId request)
         {

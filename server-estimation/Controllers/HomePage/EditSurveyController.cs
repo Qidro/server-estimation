@@ -18,6 +18,8 @@ namespace server_estimation.Controllers.HomePage
             _dbcontext = dbContext;
 
         }
+
+        //редактирование опроса
         [HttpPut]
         public async Task<IActionResult> EditSurveys([FromBody] EditSurveyContract request)
         {
@@ -30,13 +32,12 @@ namespace server_estimation.Controllers.HomePage
                 if (examination != null)
                 {
                     Console.WriteLine("Продолжаем проверку");
-                    // Удалите пользователя
                     //_dbcontext.Users.Remove(examination);
                     //var authors = _dbcontext.Survey.Include(a => a.Id == request.Id).Include(a => a.Q).ToList();
                     //var authors = await  _dbcontext.Survey.Where(a => a.Id == request.Id).ToListAsync();
                     var authorss = await _dbcontext.Answers.Include(a => a.Questions).Include(o => o.Questions.Survey).Where(s => s.Questions.Survey.Id == request.Id).ToListAsync();
 
-                    // Удаляем все продукты, связанные с заказами
+                    // Удаляем опрос
                     foreach (var questuin in authorss)
                     {
                         _dbcontext.Question.RemoveRange(questuin.Questions);
@@ -56,7 +57,9 @@ namespace server_estimation.Controllers.HomePage
                     //внесение изменений в БД
                     await _dbcontext.Survey.AddAsync(survey);
                     //поулчаем середину массива
-                    int LenIdQ = request.IdQuestion.Length / 2;
+                    //int LenIdQ = request.IdQuestion.Length / 2;
+                    
+                    //сохраняем изменения 
                     for (int i = 0; request.idQ.Length > i; i++)
                     {
                         Question question = new Question { TitleQuestion = request.titleQuestion[i], Description = request.descriptionQuestion[i], Level = request.level[i], Survey = survey };

@@ -17,6 +17,8 @@ namespace server_estimation.Controllers.HomePage
             _dbcontext = dbContext;
 
         }
+
+        //создаем опрос в БД
         [HttpPost]
         public async Task<IActionResult> CreateSurvey([FromBody] SurveyContract request)
         {

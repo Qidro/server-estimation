@@ -17,6 +17,7 @@ namespace server_estimation.Controllers
             _dbcontext = dbContext;
 
         }
+        //метод для обработки токена
         [HttpGet]
         public async Task<IActionResult> ConfirmationToken(string Token)
         {

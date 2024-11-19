@@ -12,6 +12,7 @@ namespace server_estimation.Controllers
     
     public class CheckJWT : Controller
     {
+        //проверка JWT токена
         [HttpPost]
         public async Task<IActionResult> JWTCheck([FromBody] Token request)
         {

@@ -16,7 +16,7 @@ namespace server_estimation.Controllers
             _dbcontext = dbContext;
 
         }
-
+        //редактирование юзера
         [HttpPut]
         public async Task<IActionResult> EditUsers([FromBody] EditUsers request)
         {

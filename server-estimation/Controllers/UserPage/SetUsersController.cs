@@ -18,6 +18,7 @@ namespace server_estimation.Controllers
             _dbcontext = dbContext;
 
         }
+        //получение списка пльзователей
         [HttpPost]
         public async Task<IActionResult> SetUserList()
         {

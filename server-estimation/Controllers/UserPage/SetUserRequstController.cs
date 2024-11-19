@@ -15,7 +15,7 @@ namespace server_estimation.Controllers
             _dbcontext = dbContext;
 
         }
-
+        //получение данных определенного пользователя из БД
         [HttpPost]
         public async Task<IActionResult> SetUsersRequst([FromBody] SetUserRequest request)
         {

@@ -14,7 +14,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
             _dbcontext = dbContext;
 
         }
-
+        //уонтроллер отдает лист с вариантами ответов на клиентскую часть
         [HttpPost]
         public async Task<IActionResult> SetAnswers([FromBody] SurveyId request)
         {
@@ -26,6 +26,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
 
                 foreach (var theAnswer in answers)
                 {
+                    //заполняем лист
                     asnwerList.Add(new AnswerList
                     {
                         Id = theAnswer.Id,
@@ -41,7 +42,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Произошла ошибка:" + ex.ToString());
+                Console.WriteLine("Произошла ошибка:" + ex.Message);
                 return Ok();
             }
 

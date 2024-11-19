@@ -17,6 +17,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
 
         }
 
+        //метод заполняем лист с общим описанием теста (название и описание) и отдает его на клиентскую часть
         [HttpPost]
         public async Task<IActionResult> SetSurveys([FromBody] SurveyId request)
         {
@@ -28,6 +29,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
 
                 foreach (var theSurvey in survey)
                 {
+                    //заполянем лист
                     surveyList.Add(new SurveysList
                     {
                         //Id = theSurvey.Id,

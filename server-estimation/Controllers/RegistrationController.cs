@@ -75,7 +75,7 @@ namespace server_estimation.Controllers
 
                 EmailSender emailService = new EmailSender();
                 await emailService.SendEmailAsync(user.Email, "Confirm your account",
-                    $"Подтвердите регистрацию, перейдя по ссылке: <a href=' {callbackUrl} '>link</a>");
+                    $"Подтвердите регистрацию, перейдя по ссылке:  {callbackUrl}");
 
             }
             catch (Exception e)

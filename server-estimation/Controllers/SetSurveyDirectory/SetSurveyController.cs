@@ -16,7 +16,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
             _dbcontext = dbContext;
 
         }
-
+        //метод для получения названи и описания текста для страницы редактирования опроса
         [HttpPost]
         public async Task<IActionResult> SetSurveys([FromBody] SurveyId request)
         {

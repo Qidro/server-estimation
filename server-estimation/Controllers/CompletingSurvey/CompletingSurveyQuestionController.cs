@@ -19,7 +19,7 @@ namespace server_estimation.Controllers.SetSurveyDirectory
 
         }
         [HttpPost]
-        //получение списка опросов
+        //получение списка вопросов
         public async Task<IActionResult> SetSurveyList([FromBody] SurveyId request)
         {
             try

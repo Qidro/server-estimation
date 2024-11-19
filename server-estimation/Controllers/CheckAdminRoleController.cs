@@ -17,7 +17,7 @@ namespace server_estimation.Controllers
             _dbcontext = dbContext;
 
         }
-
+        //метод проверки пользователя на права адмиистратора
         [HttpPost]
         public async Task<IActionResult> CheckRole([FromBody] Token request)
         {
